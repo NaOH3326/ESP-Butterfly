@@ -1,0 +1,56 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "idf.espIdfPathWin": "d:\\ESP\\v5.5.1\\esp-idf",
+  "idf.pythonInstallPath": "d:\\ESP\\ESP_TOOL\\tools\\idf-python\\3.11.2\\python.exe",
+  "idf.openOcdConfigs": [
+    "board/esp32s3-builtin.cfg"
+  ],
+  "idf.portWin": "COM4",
+  "idf.toolsPathWin": "d:\\ESP\\ESP_TOOL",
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32s3"
+  },
+  "clangd.path": "d:\\ESP\\ESP_TOOL\\tools\\esp-clang\\esp-19.1.2_20250312\\esp-clang\\bin\\clangd.exe",
+  "clangd.arguments": [
+    "--background-index",
+    "--query-driver=d:\\ESP\\ESP_TOOL\\tools\\xtensa-esp-elf\\esp-14.2.0_20241119\\xtensa-esp-elf\\bin\\xtensa-esp32-elf-gcc.exe",
+    "--compile-commands-dir=${workspaceFolder}\\build"
+  ],
+  "idf.flashType": "UART",
+  "files.associations": {
+    "esp_log.h": "c",
+    "string.h": "c",
+    "uart_struct.h": "c",
+    "esp_heap_caps.h": "c",
+    "gpio.h": "c",
+    "array": "c",
+    "string": "c",
+    "string_view": "c",
+    "span": "c",
+    "tool.h": "c",
+    "stdio.h": "c",
+    "freertos.h": "c",
+    "uart.h": "c",
+    "crsf.h": "c",
+    "i2c_master.h": "c",
+    "rotor_sensor_as5600.h": "c",
+    "esp_foc.h": "c",
+    "sdkconfig.h": "c",
+    "condition_variable": "c",
+    "future": "c",
+    "esp_foc_units.h": "c",
+    "esp_foc_observer_interface.h": "c",
+    "os_interface.h": "c",
+    "rotor_sensor_interface.h": "c",
+    "current_sensor_interface.h": "c",
+    "inverter_interface.h": "c",
+    "pid_controller.h": "c",
+    "format": "cpp",
+    "drv8833.h": "c",
+    "task.h": "c",
+    "esp_err.h": "c",
+    "as5600.h": "c",
+    "cmath": "c",
+    "complex": "c"
+  }
+}

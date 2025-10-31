@@ -1,0 +1,55 @@
+#include "esp_heap_caps.h"
+#include "freertos/FreeRTOS.h"
+#include <stdio.h>
+#include "crsf.h"
+
+
+
+
+
+
+
+
+
+
+
+
+const int uart_buffer_size = (128 * 2);
+float angle1 ,angle2 ;
+void app_main() {
+
+     
+    printf("Channel 1: \n");
+    printf("Channel 2: \n");
+    printf("Channel 3: \n");
+    printf("Channel 4: \n");
+    printf("Channel 5: \n");
+    printf("Channel 6: \n");
+    printf("Channel 7: \n");
+    printf("Channel 8: \n");
+
+
+servo_init(GPIO_NUM_6,LEDC_CHANNEL_1);
+servo_init(GPIO_NUM_7,LEDC_CHANNEL_2);
+crsf_init(UART_NUM_2,14,13,uart_buffer_size);
+
+while (1) {
+crsf_get_ch(UART_NUM_2);
+
+    printf("\033[1;13H%d", channel_data.ch1); // 更新Channel 1的值
+    printf("\033[2;13H%d", channel_data.ch2); // 更新Channel 2的值
+    printf("\033[3;13H%d", channel_data.ch3); // 更新Channel 3的值
+    printf("\033[4;13H%d", channel_data.ch4); // 更新Channel 4的值
+    printf("\033[5;13H%d", channel_data.ch5); // 更新Channel 5的值
+    printf("\033[6;13H%d", channel_data.ch6); // 更新Channel 6的值
+    printf("\033[7;13H%d", channel_data.ch7); // 更新Channel 7的值
+    printf("\033[8;13H%d", channel_data.ch8); // 更新Channel 8的值
+    fflush(stdout); // 刷新输出缓冲区
+
+
+
+vTaskDelay(10 / portTICK_PERIOD_MS);
+}
+
+}
+
