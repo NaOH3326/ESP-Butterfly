@@ -1,7 +1,7 @@
 EN  
 MACHINE BUTTERFLIES PROJECT  
 Now this is a project powered by NaOH , based on espidf, it's written on C  
-Readme end \n  
+Readme end   
 
 ZH  
 机械（仿生）蝴蝶项目  
