@@ -1,55 +1,52 @@
-#include "esp_heap_caps.h"
-#include "freertos/FreeRTOS.h"
-#include <stdio.h>
-#include "crsf.h"
+
+#include "config.h"
 
 
 
 
 
 
+void app_main()
+{
+    i2cdev_init();
 
+    as5600_init(bus_cfg,as5600_cfg);
+    pca9548_init(bus_cfg,pca9548_cfg);
+    bldc_motor_init(&motor_config1,&motor1);
+    bldc_motor_init(&motor_config2,&motor2);
+    bldc_motor_init(&motor_config3,&motor3);
+    bldc_motor_init(&motor_config4,&motor4);
 
+    crsf_init(UART_NUM_1,14,13,uart_buff);
 
+    ESP_ERROR_CHECK(mpu6050_init_desc(&dev, ADDR, 1, 19, 12));
+    ESP_ERROR_CHECK(mpu6050_init(&dev));
 
+    while (1)
+    {
+        
+        crsf_get_ch(UART_NUM_1);
+        duty = (((float)channel_data.ch3-960)/815)*100;
+        bldc_motor_set_speed(motor1,duty);
+        bldc_motor_set_speed(motor2,duty);
+        bldc_motor_set_speed(motor3,duty);
+        bldc_motor_set_speed(motor4,duty);
+        for (size_t i = 0; i < 4; i++)
+        {
+            pca9548_setchannel(i);
+            as5600_read_raw_angle(as5600_handle,&raw_angle);
+            printf("angle %d",raw_angle);
+        }
+        printf("\n");
 
+        float temp;
+        mpu6050_acceleration_t accel = { 0 };
+        mpu6050_rotation_t rotation = { 0 };
+        ESP_ERROR_CHECK(mpu6050_get_temperature(&dev, &temp));
+        ESP_ERROR_CHECK(mpu6050_get_motion(&dev, &accel, &rotation));
+        printf( "Acceleration: x=%.4f   y=%.4f   z=%.4f\n", accel.x, accel.y, accel.z);
+        printf( "Rotation:     x=%.4f   y=%.4f   z=%.4f\n", rotation.x, rotation.y, rotation.z);
+        printf( "Temperature:  %.1f\n", temp);
 
-const int uart_buffer_size = (128 * 2);
-float angle1 ,angle2 ;
-void app_main() {
-
-     
-    printf("Channel 1: \n");
-    printf("Channel 2: \n");
-    printf("Channel 3: \n");
-    printf("Channel 4: \n");
-    printf("Channel 5: \n");
-    printf("Channel 6: \n");
-    printf("Channel 7: \n");
-    printf("Channel 8: \n");
-
-
-servo_init(GPIO_NUM_6,LEDC_CHANNEL_1);
-servo_init(GPIO_NUM_7,LEDC_CHANNEL_2);
-crsf_init(UART_NUM_2,14,13,uart_buffer_size);
-
-while (1) {
-crsf_get_ch(UART_NUM_2);
-
-    printf("\033[1;13H%d", channel_data.ch1); // 更新Channel 1的值
-    printf("\033[2;13H%d", channel_data.ch2); // 更新Channel 2的值
-    printf("\033[3;13H%d", channel_data.ch3); // 更新Channel 3的值
-    printf("\033[4;13H%d", channel_data.ch4); // 更新Channel 4的值
-    printf("\033[5;13H%d", channel_data.ch5); // 更新Channel 5的值
-    printf("\033[6;13H%d", channel_data.ch6); // 更新Channel 6的值
-    printf("\033[7;13H%d", channel_data.ch7); // 更新Channel 7的值
-    printf("\033[8;13H%d", channel_data.ch8); // 更新Channel 8的值
-    fflush(stdout); // 刷新输出缓冲区
-
-
-
-vTaskDelay(10 / portTICK_PERIOD_MS);
+    }
 }
-
-}
-

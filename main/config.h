@@ -2,23 +2,18 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "driver/i2c_master.h"
-#include "as5600.h"
-#include "pca9548.h"
+#include "sensor.h"
 #include "motor.h"
 #include "crsf.h"
+#include "mpu6050.h"
 
 
 
 
+int uart_buff = 1024;
 
-
-
-
-
-
-
-
-
+#define ADDR MPU6050_I2C_ADDRESS_HIGH
+mpu6050_dev_t dev = { 0 };
 
 //iic总线配置
 static i2c_master_bus_config_t bus_cfg = {
@@ -32,7 +27,7 @@ static i2c_master_bus_config_t bus_cfg = {
 static i2c_device_config_t pca9548_cfg = {
     .dev_addr_length = I2C_ADDR_BIT_LEN_7,
     .device_address = 0x70,
-    .scl_speed_hz = 100000,
+    .scl_speed_hz = 400000,
 };
 static i2c_device_config_t as5600_cfg = {
     .dev_addr_length = I2C_ADDR_BIT_LEN_7,
@@ -43,9 +38,12 @@ i2c_master_bus_handle_t bus_handle;
 i2c_master_dev_handle_t as5600_handle;
 i2c_master_dev_handle_t pca9548_handle;
 
+uint16_t raw_angle;
+float angle;
 
 
-    // 电机配置
+// 电机配置
+float duty = 0;
 motor_handle_t *motor1,*motor2,*motor3,*motor4 = NULL;
     
     motor_config_t motor_config1 = {

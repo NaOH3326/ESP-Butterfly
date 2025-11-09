@@ -5,7 +5,7 @@
   "idf.openOcdConfigs": [
     "board/esp32s3-builtin.cfg"
   ],
-  "idf.portWin": "COM4",
+  "idf.portWin": "COM14",
   "idf.toolsPathWin": "d:\\ESP\\ESP_TOOL",
   "idf.customExtraVars": {
     "IDF_TARGET": "esp32s3"
@@ -51,6 +51,12 @@
     "esp_err.h": "c",
     "as5600.h": "c",
     "cmath": "c",
-    "complex": "c"
+    "complex": "c",
+    "config.h": "c",
+    "motor.h": "c",
+    "lservo.h": "c",
+    "pca9548.h": "c",
+    "mcpwm.h": "c",
+    "mpu6050.h": "c"
   }
 }

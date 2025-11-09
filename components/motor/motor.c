@@ -103,7 +103,7 @@ esp_err_t bldc_motor_set_speed(motor_handle_t *handle, float duty_cycle) {
     }
     
     handle->current_duty = duty_cycle;
-    ESP_LOGI(TAG, "设置占空比: %.1f%%", duty_cycle);
+    ESP_LOGD(TAG, "设置占空比: %.1f%%", duty_cycle);
     
     return ESP_OK;  
     }
@@ -126,7 +126,7 @@ esp_err_t bldc_motor_set_speed(motor_handle_t *handle, float duty_cycle) {
     }
     
     handle->current_duty = duty_cycle;
-    ESP_LOGI(TAG, "设置占空比: %.1f%%", duty_cycle_a);
+    ESP_LOGD(TAG, "设置占空比: %.1f%%", duty_cycle_a);
     
     return ESP_OK; 
     }
