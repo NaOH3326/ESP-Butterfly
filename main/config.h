@@ -2,7 +2,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "driver/i2c_master.h"
-#include "sensor.h"
+#include "sensor_n.h"
 #include "motor.h"
 #include "crsf.h"
 #include "mpu6050.h"

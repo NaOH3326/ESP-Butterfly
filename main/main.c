@@ -18,7 +18,7 @@ void app_main()
 
     crsf_init(UART_NUM_1,14,13,uart_buff);
 
-    ESP_ERROR_CHECK(mpu6050_init_desc(&dev, ADDR, 1, 21, 12));
+    ESP_ERROR_CHECK(mpu6050_init_desc(&dev, ADDR, 1, 19, 12));
     ESP_ERROR_CHECK(mpu6050_init(&dev));
 
     while (1)
